@@ -1,0 +1,25 @@
+The goal of the game is to be the Player with the most points when the game ends.
+The game ends when there are no more cards left in either mixedDeck (there are two decks).
+Each player starts with 5 points. Points can increase and decrease as the game progresses.
+(Players cannot have negative points.)
+
+Players gain and lose points by playing cards. Different types of cards increase/decrease points differently.
+
+There are n types of cards in the game:
+-- PointCard (gives points to the Player who plays the card)
+-- AttackCard (
+
+Players start with 3 cards in hand. The remaining cards start in two decks:
+-- one mixedDeck that contains a mixture of all card types
+-- one
+
+Each turn, a Player can choose to either:
+-- Draw a random card from the mixedDeck
+-- Play a card
+
+Players gain points by playing cards. There are 4 types of cards:
+-- Point cards (add points to the player's total -- generally give more points values)
+-- Attack cards (reduces points of another player -- generally give less points to the player)
+-- Freeze cards (freeze another player for one turn -- generally give less points to the player)
+-- Thief cards (steals a card from one player and gives it to the current player -- costs points to play)
+

@@ -6,8 +6,8 @@ public class FreezeCard extends Card implements DealsDamage, AppliesFreeze {
     public FreezeCard() {
 
         // Card settings
-        int minDamage = 5;
-        int maxDamage = 8;
+        int minDamage = 4;
+        int maxDamage = 6;
         this.damage = Rand.randomInt(minDamage, maxDamage + 1);
 
         // Points gained from playing this card

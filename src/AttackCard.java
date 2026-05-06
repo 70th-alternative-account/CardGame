@@ -54,6 +54,6 @@ public class AttackCard extends Card implements DealsDamage {
 
     @Override
     public String toString() {
-        return "Attack Card { point value: " + super.getPointValue() + ", damage: " + attackDamage + "}";
+        return "Attack Card {point value: " + super.getPointValue() + ", damage: " + attackDamage + "}";
     }
 }

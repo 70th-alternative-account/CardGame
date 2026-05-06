@@ -22,6 +22,6 @@ public class PointCard extends Card {
 
     @Override
     public String toString() {
-        return "Point Card { point value: " + super.getPointValue() + "}";
+        return "Point Card {point value: " + super.getPointValue() + "}";
     }
 }

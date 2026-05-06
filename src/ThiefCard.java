@@ -50,6 +50,6 @@ public class ThiefCard extends Card {
 
     @Override
     public String toString() {
-        return "Thief Card { point value: " + super.getPointValue() + "}";
+        return "Thief Card {point value: " + super.getPointValue() + "}";
     }
 }

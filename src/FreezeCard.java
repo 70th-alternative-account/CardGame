@@ -62,6 +62,6 @@ public class FreezeCard extends Card implements DealsDamage, AppliesFreeze {
 
     @Override
     public String toString() {
-        return "Freeze Card { point value: " + super.getPointValue() + ", damage: " + damage + "}";
+        return "Freeze Card {point value: " + super.getPointValue() + ", damage: " + damage + "}";
     }
 }

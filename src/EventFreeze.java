@@ -4,10 +4,14 @@ public class EventFreeze extends Event {
 
     public static void play(ArrayList<Player> players) {
 
+        System.out.println("The lands grow colder...");
+
+        // choose player to freeze
         Player playerToFreeze = players.get(Rand.randomInt(0, players.size()));
 
+        // freeze player
         playerToFreeze.freeze();
-        System.out.println(playerToFreeze.getName() + "was frozen!");
+        System.out.println(playerToFreeze.getName() + " was frozen!");
 
     }
 }

@@ -20,6 +20,13 @@ public class Game {
 
     private float chancesOfDamageCardBeingInDamageDeck; // % chance of a generated damage card being added to the damage-only deck
 
+    // Event settings
+    private float eventChances; // % chance (from 0-1) of starting an event
+
+    private float eventFreezeChances; // % chance (from 0-1) of the event being EventFreeze
+    private float eventStormChances;
+    //private float eventChaosChances; // leftovers of the other chances
+
     // -------- End of Settings ------- //
 
 
@@ -177,6 +184,19 @@ public class Game {
         if (thiefCardChances < 0f) {
             System.out.println("ERROR: Card chances are not all positive.");
         }
+
+
+        // Event settings
+        eventChances = 0.6f; // must be between 0 and 1
+
+        eventFreezeChances = 0.75f; // must be between 0 and 1
+        eventStormChances = 0.2f;
+
+        // eventStormChances should be positive, but check to be safe
+        float eventChaosChances = 1f - (eventFreezeChances + eventStormChances);
+        if (eventChaosChances < 0f) {
+            System.out.println("ERROR: Event chances are not all positive.");
+        }
     }
 
     // Populates the two ArrayLists with random Cards, according to the settings.
@@ -221,17 +241,31 @@ public class Game {
 
     // Runs a random event
     private void playEvent() {
-        Input.waitForUserToPressEnter("\nPress Enter to play event.");
 
-        // lil helper code. prints list of players and points
-        for (int i = 0; i < players.size(); i++) {
-            Player p = players.get(i);
-            System.out.println(p.getName() + " " + p.getNumPoints());
+        Input.waitForUserToPressEnter("\nPress Enter to start event.");
+
+        if (Rand.random() < eventChances) {
+
+            float randomValue = Rand.random(); // 0.0 -> 0.999...
+
+            if (randomValue < eventFreezeChances) {
+                EventFreeze.play(players);
+            }
+
+            else if (randomValue < eventFreezeChances + eventStormChances) {
+                EventStorm.play(players);
+            }
+
+            else {
+                EventChaos.play(players);
+            }
+
+            Input.waitForUserToPressEnter("\nPress Enter to end event.\n");
         }
 
-        EventFreeze.play(players);
-
-        Input.waitForUserToPressEnter("\nPress Enter to end event.\n");
+        else {
+            System.out.println("No events occurred...");
+        }
     }
 
     private void declareWinner() {

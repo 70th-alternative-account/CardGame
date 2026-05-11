@@ -228,7 +228,9 @@ public class Game {
             Player p = players.get(i);
             System.out.println(p.getName() + " " + p.getNumPoints());
         }
-        
+
+        EventFreeze.play(players);
+
         Input.waitForUserToPressEnter("\nPress Enter to end event.\n");
     }
 

@@ -91,10 +91,19 @@ public class Player {
     public int getNumPoints() {
         return numPoints;
     }
+    
+    public String pointsToString(int numPoints) {
+    	String pointsString = "|";
+    	for (int i = 0; i < numPoints; i++) {
+    		pointsString += "★";
+    	}
+    	pointsString += "|";
+    	return pointsString;
+    }
 
     public void displayStatus() {
         System.out.println(" | ----- " + name + " ----- ");
-        System.out.println(" | Points: " + numPoints);
+        System.out.println(pointsToString(numPoints) + numPoints);
         if (isFrozen) {
             System.out.println(" | *FROZEN*");
         }

@@ -30,18 +30,6 @@ public class Player {
                 selectedAnotherPlayer = true;
             }
         }
-
-        // do possible additional damage action
-        if (randomCard instanceof DealsDamage) {
-            DealsDamage damageCard = (DealsDamage)randomCard;
-            damageCard.doDamage(this, otherPlayer);
-        }
-
-        // do possible additional freeze action
-        if (randomCard instanceof AppliesFreeze) {
-            AppliesFreeze freezeCard = (AppliesFreeze)randomCard;
-            freezeCard.freeze(this, otherPlayer);
-        }
     }
 
     public boolean hasCardsInHand() {

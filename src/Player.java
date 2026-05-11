@@ -93,23 +93,24 @@ public class Player {
     }
     
     public String pointsToString(int numPoints) {
-    	String pointsString = "|";
+    	String pointsString = "";
     	for (int i = 0; i < numPoints; i++) {
     		pointsString += "★";
     	}
-    	pointsString += "|";
     	return pointsString;
     }
 
     public void displayStatus() {
-    	if (isFrozen) {
-    		System.out.println(" /---/ ❄ " + name + " ❄ /---/ ");
-    	}
-    	else {
-    		System.out.println(" /---/ " + name + " /---/ ");
-    	}
-        System.out.println(" | ----- " + name + " ----- ");
-        System.out.println(pointsToString(numPoints) + numPoints);
+        if (isFrozen) {
+            System.out.println(" | ----/ ❄ " + name + " ❄ /---- ");
+        }
+        else {
+            System.out.println(" | ----- " + name + " ----- ");
+        }
+        System.out.println(" | Points: " + numPoints + " " + pointsToString(numPoints));
+        if (isFrozen) {
+            System.out.println(" | ❄ FROZEN ❄ ");
+        }
         System.out.println(" | Cards in hand:");
         for (int i = 0; i < hand.size(); i++) {
             System.out.print(" | " + (i+1) + ": ");

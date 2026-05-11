@@ -75,6 +75,7 @@ public class Game {
             currentPlayerIndex += 1;
             if (currentPlayerIndex >= players.size()) {
                 currentPlayerIndex = 0;
+                playEvent();
             }
             currentPlayer = players.get(currentPlayerIndex);
 
@@ -216,6 +217,19 @@ public class Game {
                 mixedDeck.add(new ThiefCard());
             }
         }
+    }
+
+    // Runs a random event
+    private void playEvent() {
+        Input.waitForUserToPressEnter("\nPress Enter to play event.");
+
+        // lil helper code. prints list of players and points
+        for (int i = 0; i < players.size(); i++) {
+            Player p = players.get(i);
+            System.out.println(p.getName() + " " + p.getNumPoints());
+        }
+        
+        Input.waitForUserToPressEnter("\nPress Enter to end event.\n");
     }
 
     private void declareWinner() {

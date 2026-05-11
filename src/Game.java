@@ -84,6 +84,7 @@ public class Game {
             System.out.println("It's " + currentPlayer.getName() + "'s turn.\n");
             currentPlayer.displayStatus();
             Input.waitForUserToPressEnter("\nPress Enter to play " + currentPlayer.getName() + "'s turn.");
+            System.out.println();
 
             // check if the player should be skipped
             if (currentPlayer.isFrozen()) {
@@ -135,7 +136,9 @@ public class Game {
                 }
             }
 
-            Input.waitForUserToPressEnter("\nPress Enter to end " + currentPlayer.getName() + "'s turn.\n");
+            Input.waitForUserToPressEnter("\nPress Enter to end " + currentPlayer.getName() + "'s turn.");
+
+            System.out.println("\n" + "----- ----- ----- ----- ----- ----- ----- -----");
         }
 
         // End game: determine which Player had the most points

@@ -49,7 +49,7 @@ public class AttackCard extends Card implements DealsDamage {
     public void doDamage(Player currentPlayer, Player playerToDamage) {
         playerToDamage.removePoints(attackDamage);
         System.out.println("\n" + currentPlayer.getName() + " did " + attackDamage + " damage to " + playerToDamage.getName() + ".");
-        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.\n");
+        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.");
     }
 
     @Override

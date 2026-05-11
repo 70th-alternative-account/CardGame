@@ -50,7 +50,7 @@ public class FreezeCard extends Card implements DealsDamage, AppliesFreeze {
     @Override
     public void freeze(Player currentPlayer, Player playerToFreeze) {
         playerToFreeze.freeze();
-        System.out.println(currentPlayer.getName() + " froze " + playerToFreeze.getName() + "!");
+        System.out.println("\n" + currentPlayer.getName() + " froze " + playerToFreeze.getName() + "!");
     }
 
     @Override

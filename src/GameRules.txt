@@ -21,4 +21,8 @@ Each turn, a Player can choose one of 3 options:
 
 
 
-
+After each player gets a turn, an Event has a chance of triggering.
+There are 3 events:
+-- Freeze Event: A random player is frozen.
+-- Storm Event: A random player is frozen, another random player loses 4-6 points.
+-- Chaos Event: Triggers all other events.

@@ -255,11 +255,13 @@ public class Game {
                 EventChaos.play(players);
             }
 
-            Input.waitForUserToPressEnter("\nPress Enter to end event.\n");
+            Input.waitForUserToPressEnter("\nPress Enter to end event.");
+            System.out.println("\n" + "----- ----- ----- ----- ----- ----- ----- -----");
         }
 
         else {
             System.out.println("No events occurred...");
+            System.out.println("\n" + "----- ----- ----- ----- ----- ----- ----- -----");
         }
     }
 

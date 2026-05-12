@@ -4,7 +4,7 @@ public class EventChaos extends Event {
 
     public static void play(ArrayList<Player> players) {
 
-        Input.waitForUserToPressEnter("Uh oh.");
+        Input.waitForUserToPressEnter("\nuh oh");
 
         EventFreeze.play(players);
         EventStorm.play(players);

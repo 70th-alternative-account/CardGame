@@ -4,7 +4,7 @@ public class EventStorm extends Event {
 
     public static void play(ArrayList<Player> players) {
 
-        System.out.println("A storm approaches...");
+        System.out.println("\nA storm approaches...");
 
         // choose player to freeze
         int i = Rand.randomInt(0, players.size());
@@ -20,13 +20,13 @@ public class EventStorm extends Event {
         Player playerToDamage = players.get(i);
 
         // damage player
-        int minDamage = 6;
-        int maxDamage = 10;
+        int minDamage = 4;
+        int maxDamage = 6;
         int damage = Rand.randomInt(minDamage, maxDamage);
 
         playerToDamage.removePoints(damage);
         System.out.println(playerToDamage.getName() + " sustained " + damage + " damage.");
-        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.\n");
+        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.");
 
 
     }

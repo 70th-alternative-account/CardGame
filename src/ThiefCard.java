@@ -24,16 +24,7 @@ public class ThiefCard extends Card {
             return;
         }
 
-        boolean selectedAnotherPlayer = false;
-        Player otherPlayer = null;
-
-        while (!selectedAnotherPlayer) {
-            int randomPlayerIndex = Rand.randomInt(0, allPlayers.size());
-            otherPlayer = allPlayers.get(randomPlayerIndex);
-            if (otherPlayer != currentPlayer) {
-                selectedAnotherPlayer = true;
-            }
-        }
+        Player otherPlayer = currentPlayer.selectAnotherPlayer(allPlayers);
 
         // 2. remove a random card from that player
         Card removedCard = otherPlayer.removeRandomCard();

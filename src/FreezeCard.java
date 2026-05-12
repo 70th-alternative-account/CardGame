@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class FreezeCard extends Card implements DealsDamage, AppliesFreeze {
-    private int damage; // amount of points subtracted from the target
+
+    private final int damage; // amount of points subtracted from the target
 
     public FreezeCard() {
 
@@ -31,16 +32,7 @@ public class FreezeCard extends Card implements DealsDamage, AppliesFreeze {
             return;
         }
 
-        boolean selectedAnotherPlayer = false;
-        Player otherPlayer = null;
-
-        while (!selectedAnotherPlayer) {
-            int randomPlayerIndex = Rand.randomInt(0, allPlayers.size());
-            otherPlayer = allPlayers.get(randomPlayerIndex);
-            if (otherPlayer != currentPlayer) {
-                selectedAnotherPlayer = true;
-            }
-        }
+        Player otherPlayer = currentPlayer.selectAnotherPlayer(allPlayers);
 
         freeze(currentPlayer, otherPlayer);
         doDamage(currentPlayer, otherPlayer);
@@ -57,7 +49,7 @@ public class FreezeCard extends Card implements DealsDamage, AppliesFreeze {
     public void doDamage(Player currentPlayer, Player playerToDamage) {
         playerToDamage.removePoints(damage);
         System.out.println(currentPlayer.getName() + " did " + damage + " damage to " + playerToDamage.getName() + ".");
-        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.\n");
+        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.");
     }
 
     @Override

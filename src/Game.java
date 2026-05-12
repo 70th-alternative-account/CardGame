@@ -90,6 +90,7 @@ public class Game {
             if (currentPlayer.isFrozen()) {
                 System.out.println(currentPlayer.getName() + " is frozen! Skipping turn.");
                 currentPlayer.unfreeze();
+                System.out.println("\n" + "----- ----- ----- ----- ----- ----- ----- -----");
                 continue; // skips the rest of the body of the loop, and returns to the start of the loop
             }
 
@@ -118,16 +119,7 @@ public class Game {
                 System.out.println(currentPlayer.getName() + " drew a " + damageCard + " from the Damage deck.");
 
                 // pick a random player (but not oneself) to apply the damage card to
-                boolean selectedAnotherPlayer = false;
-                Player otherPlayer = null;
-
-                while (!selectedAnotherPlayer) {
-                    int randomPlayerIndex = Rand.randomInt(0, players.size());
-                    otherPlayer = players.get(randomPlayerIndex);
-                    if (otherPlayer != currentPlayer) {
-                        selectedAnotherPlayer = true;
-                    }
-                }
+                Player otherPlayer = currentPlayer.selectAnotherPlayer(players);
 
                 damageCard.doDamage(currentPlayer, otherPlayer);
                 if (damageCard instanceof AppliesFreeze) {

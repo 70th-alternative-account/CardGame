@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public abstract class Card {
 
-    private int pointValue;
+    private final int pointValue;
 
     public Card(int pointValue) {
         this.pointValue = pointValue;

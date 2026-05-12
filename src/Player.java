@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Player {
-    private String name;
+    private final String name;
     private ArrayList<Card> hand;
     private int numPoints;
     private boolean isFrozen;
@@ -18,30 +18,6 @@ public class Player {
         int randomCardIndex = Rand.randomInt(0, hand.size());
         Card randomCard = hand.remove(randomCardIndex);
         randomCard.play(this, players);
-
-        // pick a random player (but not oneself) to apply any additional actions to
-        boolean selectedAnotherPlayer = false;
-        Player otherPlayer = null;
-
-        while (!selectedAnotherPlayer) {
-            int randomPlayerIndex = Rand.randomInt(0, players.size());
-            otherPlayer = players.get(randomPlayerIndex);
-            if (otherPlayer != this) {
-                selectedAnotherPlayer = true;
-            }
-        }
-
-        // do possible additional damage action
-        if (randomCard instanceof DealsDamage) {
-            DealsDamage damageCard = (DealsDamage)randomCard;
-            damageCard.doDamage(this, otherPlayer);
-        }
-
-        // do possible additional freeze action
-        if (randomCard instanceof AppliesFreeze) {
-            AppliesFreeze freezeCard = (AppliesFreeze)randomCard;
-            freezeCard.freeze(this, otherPlayer);
-        }
     }
 
     public boolean hasCardsInHand() {
@@ -65,7 +41,7 @@ public class Player {
     }
 
     public Card removeRandomCard() {
-        if (hand.size() == 0) {
+        if (hand.isEmpty()) {
             return null; // returning null indicates there are no cards to remove
         }
 
@@ -117,5 +93,22 @@ public class Player {
             System.out.println(hand.get(i));
         }
         System.out.println(" | ----- ----- ----- ");
+    }
+
+    public Player selectAnotherPlayer(ArrayList<Player> players) {
+
+        // pick a random player (but not oneself) to apply any additional actions to
+        boolean selectedAnotherPlayer = false;
+        Player otherPlayer = null;
+
+        while (!selectedAnotherPlayer) {
+            int randomPlayerIndex = Rand.randomInt(0, players.size());
+            otherPlayer = players.get(randomPlayerIndex);
+            if (otherPlayer != this) {
+                selectedAnotherPlayer = true;
+            }
+        }
+
+        return otherPlayer;
     }
 }

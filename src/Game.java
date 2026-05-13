@@ -165,10 +165,10 @@ public class Game {
 
         // all chances must be between 0 and 1
         attackCardChances = 0.25f;
-        freezeCardChances = 0.15f;
+        freezeCardChances = 0.2f;
         thiefCardChances = 0.1f;
         windCardChances = 0.05f;
-        //pointCardChances = 0.45f; // chance of card not being any of the above
+        //pointCardChances = 0.4f; // chance of card not being any of the above
 
         // point card chances should be positive based on the math, but check just to be safe
         float pointCardChances = 1f - (attackCardChances + freezeCardChances + thiefCardChances + windCardChances);
@@ -181,45 +181,46 @@ public class Game {
     private void generateDecks() {
         for (int i = 0; i < totalNumberOfCards; i++) {
 
-            float randomValue = Rand.random(); // 0.0 -> 0.999...
+            Card card = generateCard();
 
-            // % chance of creating an attack card
-            if (randomValue < attackCardChances) {
-                AttackCard newAttackCard = new AttackCard();
-
-                if (Rand.random() < chancesOfDamageCardBeingInDamageDeck) {
-                    damageDeck.add(newAttackCard);
-                } else {
-                    mixedDeck.add(newAttackCard);
-                }
+            if (card instanceof DealsDamage && Rand.random() < chancesOfDamageCardBeingInDamageDeck) {
+                damageDeck.add((DealsDamage) card);
+            } else {
+                mixedDeck.add(card);
             }
 
-            // % chance of creating a freeze card
-            else if (randomValue < attackCardChances + freezeCardChances) {
-                FreezeCard newFreezeCard = new FreezeCard();
-
-                if (Rand.random() < chancesOfDamageCardBeingInDamageDeck) {
-                    damageDeck.add(newFreezeCard);
-                } else {
-                    mixedDeck.add(newFreezeCard);
-                }
-            }
-
-            // % chance of creating a thief card
-            else if (randomValue < attackCardChances + freezeCardChances + thiefCardChances) {
-                mixedDeck.add(new ThiefCard());
-            }
-
-            // % chance of creating a wind card
-            else if (randomValue < attackCardChances + freezeCardChances + thiefCardChances + windCardChances) {
-                mixedDeck.add(new WindCard());
-            }
-
-            // default card (point card) chances
-            else {
-                mixedDeck.add(new PointCard());
-            }
         }
+    }
+
+    // Generates a new card using the game's settings.
+    public Card generateCard() {
+
+        float randomValue = Rand.random();
+        Card card;
+
+        // AWESOME CODE !!
+
+        if (randomValue < attackCardChances) {
+            card = new AttackCard(); // % chance of creating an attack card
+        }
+
+        else if (randomValue < attackCardChances + freezeCardChances) {
+            card = new FreezeCard(); // % chance of creating a freeze card
+        }
+
+        else if (randomValue < attackCardChances + freezeCardChances + thiefCardChances) {
+            card = new ThiefCard(); // % chance of creating a thief card
+        }
+
+        else if (randomValue < attackCardChances + freezeCardChances + thiefCardChances + windCardChances) {
+            card = new WindCard(); // % chance of creating a wind card
+        }
+
+        else {
+            card = new PointCard(); // default card (point card) chances
+        }
+
+        return card;
     }
 
     private void declareWinner() {

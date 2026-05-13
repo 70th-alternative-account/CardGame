@@ -13,10 +13,11 @@ public class Game {
 
     // Deck settings
     private int totalNumberOfCards;
-    private float pointCardChances; // % chance (from 0-1) of generating a point card
+    //private float pointCardChances; // point card chances are the leftovers of the other chances
     private float attackCardChances; // % chance (from 0-1) of generating an attack card
     private float freezeCardChances; // % chance (from 0-1) of generating a freeze card
-    //private float thiefCardChances; // thief card chances are the leftovers of the other chances
+    private float thiefCardChances; // % chance (from 0-1) of generating a thief card
+    private float windCardChances; // % chance (from 0-1) of generating a wind card
 
     private float chancesOfDamageCardBeingInDamageDeck; // % chance of a generated damage card being added to the damage-only deck
 
@@ -162,13 +163,16 @@ public class Game {
         totalNumberOfCards = 20;
         chancesOfDamageCardBeingInDamageDeck = 0.4f;
 
-        pointCardChances = 0.5f; // must be between 0 and 1
-        attackCardChances = 0.25f; // must be between 0 and 1
-        freezeCardChances = 0.15f; // must be between 0 and 1
+        // all chances must be between 0 and 1
+        attackCardChances = 0.25f;
+        freezeCardChances = 0.15f;
+        thiefCardChances = 0.1f;
+        windCardChances = 0.05f;
+        //pointCardChances = 0.45f; // chance of card not being any of the above
 
-        // thief card chances should be positive based on the math, but check just to be safe
-        float thiefCardChances = 1f - (pointCardChances + attackCardChances + freezeCardChances);
-        if (thiefCardChances < 0f) {
+        // point card chances should be positive based on the math, but check just to be safe
+        float pointCardChances = 1f - (attackCardChances + freezeCardChances + thiefCardChances + windCardChances);
+        if (pointCardChances < 0f) {
             System.out.println("ERROR: Card chances are not all positive.");
         }
     }
@@ -179,13 +183,8 @@ public class Game {
 
             float randomValue = Rand.random(); // 0.0 -> 0.999...
 
-            // % chance of creating a point card
-            if (randomValue < pointCardChances) {
-                mixedDeck.add(new PointCard());
-            }
-
             // % chance of creating an attack card
-            else if (randomValue < pointCardChances + attackCardChances) {
+            if (randomValue < attackCardChances) {
                 AttackCard newAttackCard = new AttackCard();
 
                 if (Rand.random() < chancesOfDamageCardBeingInDamageDeck) {
@@ -196,7 +195,7 @@ public class Game {
             }
 
             // % chance of creating a freeze card
-            else if (randomValue < pointCardChances + attackCardChances + freezeCardChances) {
+            else if (randomValue < attackCardChances + freezeCardChances) {
                 FreezeCard newFreezeCard = new FreezeCard();
 
                 if (Rand.random() < chancesOfDamageCardBeingInDamageDeck) {
@@ -207,8 +206,18 @@ public class Game {
             }
 
             // % chance of creating a thief card
-            else {
+            else if (randomValue < attackCardChances + freezeCardChances + thiefCardChances) {
                 mixedDeck.add(new ThiefCard());
+            }
+
+            // % chance of creating a wind card
+            else if (randomValue < attackCardChances + freezeCardChances + thiefCardChances + windCardChances) {
+                mixedDeck.add(new WindCard());
+            }
+
+            // default card (point card) chances
+            else {
+                mixedDeck.add(new PointCard());
             }
         }
     }

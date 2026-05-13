@@ -108,7 +108,6 @@ public class Player {
     	else {
     		System.out.println(" /---/ " + name + " /---/ ");
     	}
-        System.out.println(" | ----- " + name + " ----- ");
         System.out.println(pointsToString(numPoints) + numPoints);
         System.out.println(" | Cards in hand:");
         for (int i = 0; i < hand.size(); i++) {

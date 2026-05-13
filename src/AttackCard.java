@@ -2,19 +2,20 @@ import java.util.ArrayList;
 
 public class AttackCard extends Card implements DealsDamage {
 
-    private int attackDamage;
+    private final int damage;
 
     public AttackCard() {
 
         // Attack card settings
-        int minAttackDamage = 5;
-        int maxAttackDamage = 8;
-        this.attackDamage = Rand.randomInt(minAttackDamage, maxAttackDamage + 1);
+        int minDamage = 5;
+        int maxDamage = 8;
+        this.damage = Rand.randomInt(minDamage, maxDamage + 1);
 
         // Points gained from playing this card
         int minPoints = 3;
         int maxPoints = 4;
         int pointValue = Rand.randomInt(minPoints, maxPoints + 1);
+
         super(pointValue);
     }
 
@@ -31,29 +32,19 @@ public class AttackCard extends Card implements DealsDamage {
             return;
         }
 
-        boolean selectedAnotherPlayer = false;
-        Player otherPlayer = null;
-
-        while (!selectedAnotherPlayer) {
-            int randomPlayerIndex = Rand.randomInt(0, allPlayers.size());
-            otherPlayer = allPlayers.get(randomPlayerIndex);
-            if (otherPlayer != currentPlayer) {
-                selectedAnotherPlayer = true;
-            }
-        }
-
+        Player otherPlayer = currentPlayer.selectAnotherPlayer(allPlayers);
         doDamage(currentPlayer, otherPlayer);
     }
 
     @Override
     public void doDamage(Player currentPlayer, Player playerToDamage) {
-        playerToDamage.removePoints(attackDamage);
-        System.out.println("\n" + currentPlayer.getName() + " did " + attackDamage + " damage to " + playerToDamage.getName() + ".");
-        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.\n");
+        playerToDamage.removePoints(damage);
+        System.out.println("\n" + currentPlayer.getName() + " did " + damage + " damage to " + playerToDamage.getName() + ".");
+        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.");
     }
 
     @Override
     public String toString() {
-        return "Attack Card {point value: " + super.getPointValue() + ", damage: " + attackDamage + "}";
+        return "Attack Card {point value: " + super.getPointValue() + ", damage: " + damage + "}";
     }
 }
